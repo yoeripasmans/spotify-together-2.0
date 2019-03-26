@@ -8,6 +8,7 @@ const configureSocket = (dispatch) => {
     console.log('connected');
   });
 
+  socket.on('disconnect', () => { socket.disconnect(); });
   // the socket.on method is like an event listener
   // just like how our redux reducer works
   // the different actions that our socket/client will emit

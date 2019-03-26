@@ -1,0 +1,10 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const Login = () => (
+  <>
+    <a href="http://localhost:3001/auth/spotify/">Login with Spotify</a>
+  </>
+);
+
+export default Login;
