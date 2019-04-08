@@ -1,21 +1,19 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import GlobalStyle from 'styles';
-
-const Login = lazy(() => import('modules/Login'));
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      message: 'Not signed in',
+      user: '',
     };
   }
 
   componentDidMount() {
-    fetch('http://localhost:3001/api/user')
-      .then((res) => res.text())
-      .then((res) => this.setState({ message: res }));
+    fetch('http://localhost:3001/api/user', { credentials: 'include' })
+      .then((res) => res.json())
+      .then((res) => { this.setState({ 'user': res }); });
   }
 
   render() {
@@ -26,8 +24,14 @@ class App extends React.Component {
           <Switch>
             <Route path="/" render={() =>
               <div>
-              <p>{this.state.message}</p>
-              <Login />
+              {this.state.user ? (
+                <div>
+                  <p>Welkom {this.state.user.displayName}</p>
+                  <a href="http://localhost:3001/logout">Logout</a>
+                </div>
+               ) : (
+                  <a href="http://localhost:3001/auth/spotify">Login with Spotify</a>
+               )}
               </div>
           } exact />
           </Switch>
