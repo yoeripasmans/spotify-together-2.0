@@ -1,12 +1,16 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import * as appReducers from 'ducks';
+import * as appReducers from 'app/ducks';
+import * as api from 'services/api';
 
-let middleware = applyMiddleware(thunk);
+let middleware = applyMiddleware(thunk.withExtraArgument(api));
 const reducers = combineReducers({ ...appReducers });
 
-if (__DEV__ && window.__REDUX_DEVTOOLS_EXTENSION__) {
-  middleware = compose(middleware, window.__REDUX_DEVTOOLS_EXTENSION__());
+if (__DEV__ && typeof window.devToolsExtension === 'function') {
+  middleware = compose(
+    middleware,
+    window.devToolsExtension(),
+  );
 }
 
 export default createStore(reducers, middleware);

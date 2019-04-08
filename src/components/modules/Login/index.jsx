@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import Anchor from 'common/Anchor';
+import getRootUrl from '../../../../config/getRootUrl';
 
 const Login = () => (
   <>
-    <a href="http://localhost:3001/auth/spotify">Login with Spotify</a>
-    <a href="http://localhost:3001/logout">Logout</a>
+    <Anchor href={`${getRootUrl}/auth/spotify`}>Login with Spotify</Anchor>
   </>
 );
 
