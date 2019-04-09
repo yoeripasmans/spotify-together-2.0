@@ -1,11 +1,11 @@
 import createAction from 'services/createAction';
 
-const GET_USER = 'user/GET_USER';
-const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
-const GET_USER_FAILED = 'user/GET_USER_FAILED';
+const GET_PLAYLISTS = 'playlists/GET_PLAYLISTS';
+const GET_PLAYLISTS_SUCCESS = 'playlists/GET_PLAYLISTS_SUCCESS';
+const GET_PLAYLISTS_FAILED = 'playlists/GET__PLAYLIST_FAILED';
 
 const initialState = {
-  userData: {},
+  playlistsData: [],
   isUserSignedIn: false,
   error: false,
   loading: false,
@@ -13,21 +13,20 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-  case GET_USER:
+  case GET_PLAYLISTS:
     return {
       ...state,
       error: false,
       loading: true,
     };
-  case GET_USER_SUCCESS:
+  case GET_PLAYLISTS_SUCCESS:
     return {
       ...state,
-      userData: payload,
-      isUserSignedIn: true,
+      playlistsData: payload,
       error: false,
       loading: false,
     };
-  case GET_USER_FAILED:
+  case GET_PLAYLISTS_FAILED:
     return {
       ...state,
       isUserSignedIn: false,
@@ -39,12 +38,12 @@ export default (state = initialState, { type, payload }) => {
   }
 };
 
-export const getUserSuccess = createAction(GET_USER_SUCCESS);
-export const getUserFailed = createAction(GET_USER_FAILED);
+export const getUserSuccess = createAction(GET_PLAYLISTS_SUCCESS);
+export const getUserFailed = createAction(GET_PLAYLISTS_FAILED);
 
-export const getUser = () => (dispatch, getState, api) => {
-  dispatch({ type: GET_USER });
-  api.get({ path: 'user', withAuth: false })
+export const getPlaylists = () => (dispatch, getState, api) => {
+  dispatch({ type: GET_PLAYLISTS });
+  api.get({ path: 'playlists', withAuth: false })
   .then((response) => {
     dispatch(getUserSuccess(response));
   })

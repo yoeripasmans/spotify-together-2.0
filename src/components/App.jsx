@@ -17,10 +17,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {
-      isUserSignedIn,
-      userData,
-    } = this.props;
+    const { isUserSignedIn } = this.props;
 
     return (
       <main>
@@ -33,11 +30,7 @@ class App extends React.Component {
               <Redirect from="/" to="/login" exact/>
             )}
 
-            <Route
-              path="/playlists"
-              render={(props) => (
-                <PlaylistOverview userData={userData} />
-              )} exact />
+            <Route path="/playlists" component={PlaylistOverview} exact />
             <Route path="/login" component={Login} exact />
 
           </Switch>
@@ -49,14 +42,12 @@ class App extends React.Component {
 
 App.propTypes = {
   getUser: PT.func,
-  userData: PT.object,
   isUserSignedIn: PT.bool,
 };
 
 export default compose(
   withRouter,
   connect((state) => ({
-    userData: state.user.userData,
     isUserSignedIn: state.user.isUserSignedIn,
   }), {
     getUser,
