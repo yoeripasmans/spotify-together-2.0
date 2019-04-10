@@ -44,7 +44,7 @@ export const getUserFailed = createAction(GET_USER_FAILED);
 
 export const getUser = () => (dispatch, getState, api) => {
   dispatch({ type: GET_USER });
-  api.get({ path: 'user', withAuth: false })
+  api.get({ path: 'user' })
   .then((response) => {
     dispatch(getUserSuccess(response));
   })

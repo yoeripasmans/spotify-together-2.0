@@ -43,7 +43,7 @@ export const getUserFailed = createAction(GET_PLAYLISTS_FAILED);
 
 export const getPlaylists = () => (dispatch, getState, api) => {
   dispatch({ type: GET_PLAYLISTS });
-  api.get({ path: 'playlists', withAuth: false })
+  api.get({ path: 'playlists' })
   .then((response) => {
     dispatch(getUserSuccess(response));
   })
