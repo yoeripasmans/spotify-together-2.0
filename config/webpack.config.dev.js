@@ -18,6 +18,7 @@ const devConfig = {
     port: process.env.PORT || 3000,
     stats: 'minimal',
     historyApiFallback: true,
+    host: '0.0.0.0',
   },
 };
 
