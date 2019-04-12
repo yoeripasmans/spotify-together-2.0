@@ -1,2 +1,3 @@
 export user from './user';
-export playlists from './playlists';
+export playlist from './playlist';
+export playlistOverview from './playlistOverview';

@@ -1,25 +1,26 @@
 import React from 'react';
 import PT from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Anchor from 'common/Anchor';
 import getRootUrl from '../../../../config/getRootUrl';
 
-import { getPlaylists } from 'ducks/playlists';
+import { getAllPlaylists } from 'ducks/playlistOverview';
 
 class PlaylistOverview extends React.Component {
   componentDidMount() {
-    this.props.getPlaylists();
+    this.props.getAllPlaylists();
   }
 
   render() {
-    const { playlistData, userData } = this.props;
+    const { playlists, userData } = this.props;
 
     return (
       <>
         <p>Welkom {userData.displayName}</p>
         <Anchor href={`${getRootUrl}/logout`}>Logout</Anchor>
-        {playlistData.map((playlist) =>
-          <li key={playlist._id}>{playlist.name}</li>
+        {playlists.map((playlist) =>
+          <Link to={`playlist/${playlist._id}`} key={playlist._id}>{playlist.name}</Link>
         )}
       </>
     );
@@ -28,10 +29,11 @@ class PlaylistOverview extends React.Component {
 
 PlaylistOverview.propTypes = {
   userData: PT.object,
-  getPlaylists: PT.func,
-  playlistData: PT.array,
+  getAllPlaylists: PT.func,
+  playlists: PT.array,
 };
+
 export default connect((state) => ({
-  playlistData: state.playlists.playlistsData,
+  playlists: state.playlistOverview.playlists,
   userData: state.user.userData,
-}), { getPlaylists })(PlaylistOverview);
+}), { getAllPlaylists })(PlaylistOverview);

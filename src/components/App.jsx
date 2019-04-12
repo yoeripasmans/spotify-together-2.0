@@ -9,6 +9,7 @@ import { getUser } from 'ducks/user';
 
 import Login from 'modules/Login';
 import PlaylistOverview from 'modules/PlaylistOverview';
+import Playlist from 'modules/Playlist';
 
 class App extends React.Component {
 
@@ -32,6 +33,7 @@ class App extends React.Component {
 
             <Route path="/playlists" component={PlaylistOverview} exact />
             <Route path="/login" component={Login} exact />
+            <Route path="/playlist/:id" component={Playlist} exact />
 
           </Switch>
         </Suspense>

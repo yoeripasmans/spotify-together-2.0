@@ -1,6 +1,7 @@
 import io from 'socket.io-client';
+import getRootUrl from '../config/getRootUrl';
 
-const socket = io('http://localhost:3001');
+const socket = io(getRootUrl);
 
 const configureSocket = (dispatch) => {
   // make sure our socket is connected to the port

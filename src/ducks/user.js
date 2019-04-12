@@ -1,4 +1,5 @@
 import createAction from 'services/createAction';
+import { socket } from 'components/Root';
 
 const GET_USER = 'user/GET_USER';
 const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
@@ -20,6 +21,7 @@ export default (state = initialState, { type, payload }) => {
       loading: true,
     };
   case GET_USER_SUCCESS:
+    socket && socket.emit('USER_CONNECTED', state);
     return {
       ...state,
       userData: payload,
@@ -44,7 +46,7 @@ export const getUserFailed = createAction(GET_USER_FAILED);
 
 export const getUser = () => (dispatch, getState, api) => {
   dispatch({ type: GET_USER });
-  api.get({ path: 'user' })
+  api.get({ path: 'me' })
   .then((response) => {
     dispatch(getUserSuccess(response));
   })
