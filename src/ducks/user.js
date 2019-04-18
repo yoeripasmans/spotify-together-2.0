@@ -21,7 +21,7 @@ export default (state = initialState, { type, payload }) => {
       loading: true,
     };
   case GET_USER_SUCCESS:
-    socket && socket.emit('USER_CONNECTED', state);
+    socket.emit('USER_CONNECTED', payload);
     return {
       ...state,
       userData: payload,

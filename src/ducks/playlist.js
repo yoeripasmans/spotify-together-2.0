@@ -1,4 +1,5 @@
 import createAction from 'services/createAction';
+import { socket } from 'components/Root';
 
 const GET_PLAYLIST = 'playlist/GET_PLAYLIST';
 const GET_PLAYLIST_SUCCESS = 'playlist/GET_PLAYLIST_SUCCESS';
@@ -19,6 +20,7 @@ export default (state = initialState, { type, payload }) => {
       loading: true,
     };
   case GET_PLAYLIST_SUCCESS:
+  socket && socket.emit('join', payload._id);
     return {
       ...state,
       playlistData: payload,
