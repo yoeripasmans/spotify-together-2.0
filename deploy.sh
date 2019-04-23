@@ -1,7 +1,7 @@
 #!/bin/bash
 PROJECT=spotify-together
 
-TEST_HOST=2027
+TEST_PORT=2027
 
 #Don't touch this
 ENV=$1

@@ -1,7 +1,7 @@
 const getRootUrl = () => {
   switch (process.env.APP_ENV) {
-  case 'production':
-    return 'http://localhost:3001';
+  case 'test':
+    return 'http://spotify-together-api.peggy';
   default:
     return 'http://localhost:3001';
   }
