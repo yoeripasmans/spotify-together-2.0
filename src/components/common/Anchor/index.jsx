@@ -6,7 +6,8 @@ const Anchor = styled.a.attrs(({ href }) => ({
   rel: 'noopener noreferrer',
   href,
 }))`
-  color: ${(props) => props.theme.black};
+  color: #fff;
+  margin-left: 15px;
   text-decoration: none;
 `;
 

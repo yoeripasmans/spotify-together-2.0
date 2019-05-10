@@ -1,27 +1,23 @@
 import React from 'react';
 import PT from 'prop-types';
-import styled from 'styled-components';
-import Logo from 'vectors/logo.svg';
 
-const ExtendedLogo = styled(Logo)`
-    width: 180px;
-    height: 28px;
-`;
+import { ExtendedLogo, Header, UserAccountDetails, ProfileImg, AccountLabel } from './styled';
 
-const Header = styled.header`
-    max-width: 77em;
-    margin: 0 auto;
-    padding: 0 1em;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    height: 4em;
-`;
+import Anchor from 'common/Anchor';
+import getRootUrl from '../../../../config/getRootUrl';
 
 const MainHeader = ({ userData }) => (
-    <Header>
-        <ExtendedLogo />
-    </Header>
+  <Header>
+    <ExtendedLogo />
+    <UserAccountDetails>
+      <div>
+        <AccountLabel>Account</AccountLabel>
+        <div>{userData.displayName || userData.username || 'Guest'}</div>
+      </div>
+      <ProfileImg src={userData.profilePic || 'https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png'} />
+    </UserAccountDetails>
+    <Anchor href={`${getRootUrl}/logout`}>Log out</Anchor>
+  </Header>
 );
 
 MainHeader.propTypes = {
