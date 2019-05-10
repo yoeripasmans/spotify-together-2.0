@@ -5,6 +5,8 @@ import { socket } from 'components/Root';
 
 import { getPlaylist, resetPlaylistData } from 'ducks/playlist';
 
+import MainHeader from 'common/MainHeader';
+
 import isEmpty from 'lodash/isEmpty';
 
 class Playlist extends React.Component {
@@ -36,12 +38,13 @@ class Playlist extends React.Component {
   };
 
   render() {
-    const { playlistData } = this.props;
+    const { playlistData, userData } = this.props;
 
     if (isEmpty(playlistData)) return null;
 
     return (
       <>
+        <MainHeader userData={userData} />
         <h1>{playlistData.name}</h1>
         <ul>
           {playlistData.activeUsers.map((user) =>
