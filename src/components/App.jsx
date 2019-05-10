@@ -11,6 +11,8 @@ import Login from 'modules/Login';
 import PlaylistOverview from 'modules/PlaylistOverview';
 import Playlist from 'modules/Playlist';
 
+import PrivateRoute from 'common/PrivateRoute';
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -31,9 +33,9 @@ class App extends React.Component {
               <Redirect from="/" to="/login" exact/>
             )}
 
-            <Route path="/playlists" component={PlaylistOverview} exact />
+            <PrivateRoute path="/playlists" component={PlaylistOverview} isUserSignedIn exact />
+            <PrivateRoute path="/playlist/:id" component={Playlist} isUserSignedIn exact />
             <Route path="/login" component={Login} exact />
-            <Route path="/playlist/:id" component={Playlist} exact />
 
           </Switch>
         </Suspense>

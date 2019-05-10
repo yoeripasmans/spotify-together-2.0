@@ -1,9 +1,10 @@
 import createAction from 'services/createAction';
-import { socket } from 'components/Root';
 
 const GET_PLAYLIST = 'playlist/GET_PLAYLIST';
 const GET_PLAYLIST_SUCCESS = 'playlist/GET_PLAYLIST_SUCCESS';
 const GET_PLAYLIST_FAILED = 'playlist/GET_PLAYLIST_FAILED';
+const RESET_PLAYLIST = 'playlist/RESET_PLAYLIST';
+const UPDATE_PLAYLIST = 'playlist/UPDATE_PLAYLIST';
 
 const initialState = {
   playlistData: {},
@@ -20,7 +21,6 @@ export default (state = initialState, { type, payload }) => {
       loading: true,
     };
   case GET_PLAYLIST_SUCCESS:
-  socket && socket.emit('join', payload._id);
     return {
       ...state,
       playlistData: payload,
@@ -33,15 +33,24 @@ export default (state = initialState, { type, payload }) => {
       loading: false,
       error: true,
     };
+  case UPDATE_PLAYLIST:
+    return {
+      ...state,
+      playlistData: payload,
+    };
+  case RESET_PLAYLIST:
+    return initialState;
   default:
     return state;
   }
 };
 
+export const resetPlaylistData = createAction(RESET_PLAYLIST);
+
 export const getPlaylistSuccess = createAction(GET_PLAYLIST_SUCCESS);
 export const getPlaylistFailed = createAction(GET_PLAYLIST_FAILED);
 
-export const getPlaylist = (id) => (dispatch, getState, api) => {
+export const getPlaylist = (id) => (dispatch, getState, api) =>  {
   dispatch({ type: GET_PLAYLIST });
   api.get({ path: 'playlist/' + id })
   .then((response) => {
@@ -51,3 +60,5 @@ export const getPlaylist = (id) => (dispatch, getState, api) => {
     dispatch(getPlaylistFailed(error));
   });
 };
+
+export const updatePlaylist = createAction(UPDATE_PLAYLIST);

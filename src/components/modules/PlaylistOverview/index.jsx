@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 import Anchor from 'common/Anchor';
 import getRootUrl from '../../../../config/getRootUrl';
 
-import { getAllPlaylists } from 'ducks/playlistOverview';
+import { getAllPlaylists } from 'ducks/allPlaylists';
 
 class PlaylistOverview extends React.Component {
   componentDidMount() {
-    this.props.getAllPlaylists();
+    if (!this.props.allPlaylistsLoaded) {
+      this.props.getAllPlaylists();
+    }
   }
 
   render() {
@@ -31,9 +33,11 @@ PlaylistOverview.propTypes = {
   userData: PT.object,
   getAllPlaylists: PT.func,
   playlists: PT.array,
+  allPlaylistsLoaded: PT.bool,
 };
 
 export default connect((state) => ({
   playlists: state.playlistOverview.playlists,
+  allPlaylistsLoaded: state.playlistOverview.allPlaylistsLoaded,
   userData: state.user.userData,
 }), { getAllPlaylists })(PlaylistOverview);

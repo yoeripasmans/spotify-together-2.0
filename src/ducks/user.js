@@ -1,5 +1,4 @@
 import createAction from 'services/createAction';
-import { socket } from 'components/Root';
 
 const GET_USER = 'user/GET_USER';
 const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
@@ -21,7 +20,6 @@ export default (state = initialState, { type, payload }) => {
       loading: true,
     };
   case GET_USER_SUCCESS:
-    socket.emit('USER_CONNECTED', payload);
     return {
       ...state,
       userData: payload,

@@ -8,6 +8,7 @@ const initialState = {
   playlists: [],
   error: false,
   loading: false,
+  allPlaylistsLoaded: false,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -24,12 +25,14 @@ export default (state = initialState, { type, payload }) => {
       playlists: payload,
       error: false,
       loading: false,
+      allPlaylistsLoaded: true,
     };
   case GET_ALLPLAYLISTS_FAILED:
     return {
       ...state,
       loading: false,
       error: true,
+      allPlaylistsLoaded: false,
     };
   default:
     return state;
