@@ -1,9 +1,13 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getAllPlaylists } from 'ducks/allPlaylists';
+
+import PlaylistOverviewList from './PlaylistOverviewList';
+import Header from 'common/Header';
+
+import isEmpty from 'lodash/isEmpty';
 
 class PlaylistOverview extends React.Component {
   componentDidMount() {
@@ -13,13 +17,14 @@ class PlaylistOverview extends React.Component {
   }
 
   render() {
-    const { playlists } = this.props;
+    const { playlistData } = this.props;
+
+    if (isEmpty(playlistData)) return null;
 
     return (
       <>
-        {playlists.map((playlist) =>
-          <Link to={`playlist/${playlist._id}`} key={playlist._id}>{playlist.name}</Link>
-        )}
+        <Header content="All playlists" />
+        <PlaylistOverviewList playlistData={playlistData} />
       </>
     );
   }
@@ -27,11 +32,11 @@ class PlaylistOverview extends React.Component {
 
 PlaylistOverview.propTypes = {
   getAllPlaylists: PT.func,
-  playlists: PT.array,
+  playlistData: PT.array,
   allPlaylistsLoaded: PT.bool,
 };
 
 export default connect((state) => ({
-  playlists: state.playlistOverview.playlists,
+  playlistData: state.playlistOverview.playlists,
   allPlaylistsLoaded: state.playlistOverview.allPlaylistsLoaded,
 }), { getAllPlaylists })(PlaylistOverview);
