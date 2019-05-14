@@ -1,16 +1,20 @@
 import qs from 'qs';
-import API_ENDPOINT from '../../../config/api';
-import getRootUrl from '../../../config/getRootUrl';
+import config from './config';
 
 export default ({
-  method, path, query, body, file = false,
+  method, path, query, body, withAuth = config.defaultWithAuth, file = false, error,
 }) => ({
-  path: `${API_ENDPOINT}${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
+  path: `${config.apiUrl}${path}${query ? `?${qs.stringify(query, { encode: false })}` : ''}`,
   options: {
     credentials: 'include',
     withCredentials: true,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(withAuth ? { 'x-access-token': localStorage.getItem('x-access-token') } : {}),
+    },
     method,
     ...(body ? { body: JSON.stringify(body) } : {}),
   },
   file,
+  errorConfig: error,
 });

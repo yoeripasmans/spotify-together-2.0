@@ -2,13 +2,15 @@ import generateOptions from './generateOptions';
 import request from './request';
 
 const setupRequest = ({
-  method, path, body, file, query,
+  method, path, body, withAuth, file, query, error,
 }) => request(generateOptions({
-  method, path, body, file, query,
+  method, path, body, withAuth, file, query, error,
 }));
 
-export const get = (args) => setupRequest({ method: 'GET', ...args });
-export const del = (args) => setupRequest({ method: 'DELETE', ...args });
-export const post = (args) => setupRequest({ method: 'POST', ...args });
-export const put = (args) => setupRequest({ method: 'PUT', ...args });
-export const patch = (args) => setupRequest({ method: 'PATCH', ...args });
+export default {
+  get: (args) => setupRequest({ method: 'GET', ...args }),
+  del: (args) => setupRequest({ method: 'DELETE', ...args }),
+  post: (args) => setupRequest({ method: 'POST', ...args }),
+  put: (args) => setupRequest({ method: 'PUT', ...args }),
+  patch: (args) => setupRequest({ method: 'PATCH', ...args }),
+};

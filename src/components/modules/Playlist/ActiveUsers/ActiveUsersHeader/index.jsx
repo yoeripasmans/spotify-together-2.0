@@ -15,7 +15,7 @@ const Title = styled.h3`
 
 const ActiveUsersHeader = ({ userAmount }) => (
   <Header>
-    <Title>{userAmount >= 1 ? `${userAmount} User` : `${userAmount} Users`}</Title>
+    <Title>{userAmount <= 1 ? `${userAmount} User` : `${userAmount} Users`}</Title>
   </Header>
 );
 

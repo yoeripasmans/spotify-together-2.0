@@ -1,13 +1,9 @@
 import React from 'react';
 import PT from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 const PrivateRoute = ({ component: Component, isUserSignedIn, ...rest }) => (
-  <Route {...rest} render={(props) => (
-    isUserSignedIn
-      ? <Component {...props} />
-      : <Redirect to="/login" />
-  )} />
+  <Route {...rest} render={(props) => isUserSignedIn && <Component {...props} />} />
 );
 
 PrivateRoute.propTypes = {

@@ -26,18 +26,20 @@ class App extends React.Component {
       <main>
         <GlobalStyle />
         <Suspense fallback={<span>loading</span>}>
-          {isUserSignedIn ? (
-            <MainHeader userData={userData} />
-          ) : null}
+          {isUserSignedIn && <MainHeader userData={userData} />}
           <Switch>
-            {isUserSignedIn ? (
-              <Redirect from="/login" to="/playlists" exact/>
-            ) : (
-              <Redirect from="/" to="/login" exact/>
-            )}
-            <PrivateRoute path="/playlists" component={PlaylistOverview} isUserSignedIn exact />
-            <PrivateRoute path="/playlist/:id" component={Playlist} isUserSignedIn exact />
+            <PrivateRoute
+              path="/playlists"
+              component={PlaylistOverview}
+              isUserSignedIn={isUserSignedIn}
+              exact />
+            <PrivateRoute
+              path="/playlist/:id"
+              component={Playlist}
+              isUserSignedIn={isUserSignedIn}
+              exact />
             <Route path="/login" component={Login} exact />
+            {isUserSignedIn && <Redirect to="/playlists" />}
           </Switch>
         </Suspense>
       </main>
@@ -55,6 +57,7 @@ export default compose(
   withRouter,
   connect((state) => ({
     isUserSignedIn: state.user.isUserSignedIn,
+    isUserLoading: state.user.loading,
     userData: state.user.userData,
   }), {
     getUser,

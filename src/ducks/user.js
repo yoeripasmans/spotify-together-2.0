@@ -6,7 +6,7 @@ const GET_USER_FAILED = 'user/GET_USER_FAILED';
 
 const initialState = {
   userData: {},
-  isUserSignedIn: false,
+  isUserSignedIn: null,
   error: false,
   loading: false,
 };
