@@ -5,8 +5,11 @@ import { socket } from 'components/Root';
 
 import { getPlaylist, resetPlaylistData } from 'ducks/playlist';
 
+import BackgroundImage from 'common/BackgroundImage';
+
 import PlaylistHeader from './PlaylistHeader';
 import ActiveUsers from './ActiveUsers';
+import Queue from './Queue';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -47,6 +50,8 @@ class Playlist extends React.Component {
       <>
         <PlaylistHeader name={playlistData.name} createdBy={playlistData.createdBy} tracks={playlistData.tracks} />
         <ActiveUsers userData={playlistData.activeUsers} />
+        <Queue tracks={playlistData.tracks} tableHandler={this.removeTrackHandler} />
+        <BackgroundImage currentTrack={playlistData.tracks[0].album.images[0].url} />
       </>
     );
   }
