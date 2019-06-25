@@ -1,6 +1,6 @@
 const getRootUrl = () => {
   switch (process.env.APP_ENV) {
-  case 'production':
+  case 'acceptation':
     return 'https://spotifytogether.labela.nl/';
   case 'test':
     return 'http://spotify-together-api.peggy';

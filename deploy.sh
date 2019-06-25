@@ -2,8 +2,10 @@
 PROJECT=spotify-together
 
 TEST_PORT=2027
-PROD_HOST=149.202.216.168
-PROD_USER=spotify
+
+ACC_HOST=149.202.216.168
+ACC_USER=spotify
+ACC_PORT=2028
 
 #Don't touch this
 ENV=$1
