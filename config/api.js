@@ -1,7 +1,7 @@
 const getApiEndPoint = () => {
   switch (process.env.APP_ENV) {
   case 'acceptation':
-    return 'http://spotifytogether.labela.nl/api/';
+    return 'https://spotifytogether-api.labela.nl/api/';
   case 'test':
     return 'http://spotify-together-api.peggy/api/';
   default:
